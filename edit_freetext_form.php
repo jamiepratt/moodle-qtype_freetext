@@ -43,55 +43,17 @@ class qtype_freetext_edit_form extends question_edit_form {
         $mform->addElement('select', 'usecase',
                 get_string('casesensitive', 'qtype_freetext'), $menu);
 
-        $mform->addElement('static', 'answersinstruct',
-                get_string('correctanswers', 'qtype_freetext'),
-                get_string('filloutoneanswer', 'qtype_freetext'));
-        $mform->closeHeaderBefore('answersinstruct');
-
-        $this->add_per_answer_fields($mform, get_string('answerno', 'qtype_freetext', '{no}'),
-                question_bank::fraction_options());
-
         $this->add_interactive_settings();
     }
 
-    protected function get_more_choices_string() {
-        return get_string('addmoreanswerblanks', 'qtype_freetext');
-    }
 
     protected function data_preprocessing($question) {
         $question = parent::data_preprocessing($question);
-        $question = $this->data_preprocessing_answers($question);
         $question = $this->data_preprocessing_hints($question);
 
         return $question;
     }
 
-    public function validation($data, $files) {
-        $errors = parent::validation($data, $files);
-        $answers = $data['answer'];
-        $answercount = 0;
-        $maxgrade = false;
-        foreach ($answers as $key => $answer) {
-            $trimmedanswer = trim($answer);
-            if ($trimmedanswer !== '') {
-                $answercount++;
-                if ($data['fraction'][$key] == 1) {
-                    $maxgrade = true;
-                }
-            } else if ($data['fraction'][$key] != 0 ||
-                    !html_is_blank($data['feedback'][$key]['text'])) {
-                $errors["answeroptions[{$key}]"] = get_string('answermustbegiven', 'qtype_freetext');
-                $answercount++;
-            }
-        }
-        if ($answercount==0) {
-            $errors['answeroptions[0]'] = get_string('notenoughanswers', 'qtype_freetext', 1);
-        }
-        if ($maxgrade == false) {
-            $errors['answeroptions[0]'] = get_string('fractionsnomax', 'question');
-        }
-        return $errors;
-    }
 
     public function qtype() {
         return 'freetext';

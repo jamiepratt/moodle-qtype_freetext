@@ -41,9 +41,6 @@ class restore_qtype_freetext_plugin extends restore_qtype_plugin {
 
         $paths = array();
 
-        // This qtype uses question_answers, add them.
-        $this->add_question_question_answers($paths);
-
         // Add own qtype stuff.
         $elename = 'freetext';
         // We used get_recommended_name() so this works.
