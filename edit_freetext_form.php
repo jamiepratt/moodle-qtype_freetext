@@ -35,6 +35,9 @@ defined('MOODLE_INTERNAL') || die();
  */
 class qtype_freetext_edit_form extends question_edit_form {
 
+    /**
+     * @param MoodleQuickForm $mform
+     */
     protected function definition_inner($mform) {
         $menu = array(
             get_string('caseno', 'qtype_freetext'),
@@ -44,6 +47,12 @@ class qtype_freetext_edit_form extends question_edit_form {
                 get_string('casesensitive', 'qtype_freetext'), $menu);
 
         $this->add_interactive_settings();
+
+        // Remove the default mark field from form and replace with constant.
+        $mform->removeElement('defaultmark');
+        $mform->addElement('hidden', 'defaultmark');
+        $mform->setConstant('defaultmark', 1);
+
     }
 
 
