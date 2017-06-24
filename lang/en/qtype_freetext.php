@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'qtype_shortanswer', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'qtype_freetext', language 'en', branch 'MOODLE_20_STABLE'
  *
  * @package    qtype
- * @subpackage shortanswer
+ * @subpackage freetext
  * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,9 +35,9 @@ $string['correctanswers'] = 'Correct answers';
 $string['filloutoneanswer'] = 'You must provide at least one possible answer. Answers left blank will not be used. \'*\' can be used as a wildcard to match any characters. The first matching answer will be used to determine the score and feedback.';
 $string['notenoughanswers'] = 'This type of question requires at least {$a} answers';
 $string['pleaseenterananswer'] = 'Please enter an answer.';
-$string['pluginname'] = 'Short answer';
+$string['pluginname'] = 'Free text';
 $string['pluginname_help'] = 'In response to a question (that may include a image) the respondent types a word or short phrase. There may be several possible correct answers, each with a different grade. If the "Case sensitive" option is selected, then you can have different scores for "Word" or "word".';
-$string['pluginname_link'] = 'question/type/shortanswer';
-$string['pluginnameadding'] = 'Adding a short answer question';
-$string['pluginnameediting'] = 'Editing a Short answer question';
+$string['pluginname_link'] = 'question/type/freetext';
+$string['pluginnameadding'] = 'Adding a Free text question';
+$string['pluginnameediting'] = 'Editing a Free text question';
 $string['pluginnamesummary'] = 'Allows a response of one or a few words that is graded by comparing against various model answers, which may contain wildcards.';

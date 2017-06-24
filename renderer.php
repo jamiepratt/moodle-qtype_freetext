@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Short answer question renderer class.
+ * Free text question renderer class.
  *
  * @package    qtype
- * @subpackage shortanswer
+ * @subpackage freetext
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,12 +28,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Generates the output for short answer questions.
+ * Generates the output for Free text questions.
  *
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_shortanswer_renderer extends qtype_renderer {
+class qtype_freetext_renderer extends qtype_renderer {
     public function formulation_and_controls(question_attempt $qa,
             question_display_options $options) {
 
@@ -86,7 +86,7 @@ class qtype_shortanswer_renderer extends qtype_renderer {
 
         if (!$placeholder) {
             $result .= html_writer::start_tag('div', array('class' => 'ablock form-inline'));
-            $result .= html_writer::tag('label', get_string('answer', 'qtype_shortanswer',
+            $result .= html_writer::tag('label', get_string('answer', 'qtype_freetext',
                     html_writer::tag('span', $input, array('class' => 'answer'))),
                     array('for' => $inputattributes['id']));
             $result .= html_writer::end_tag('div');
@@ -121,7 +121,7 @@ class qtype_shortanswer_renderer extends qtype_renderer {
             return '';
         }
 
-        return get_string('correctansweris', 'qtype_shortanswer',
+        return get_string('correctansweris', 'qtype_freetext',
                 s($question->clean_response($answer->answer)));
     }
 }

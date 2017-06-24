@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Short answer question definition class.
+ * Free text question definition class.
  *
  * @package    qtype
- * @subpackage shortanswer
+ * @subpackage freetext
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -29,12 +29,12 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/question/type/questionbase.php');
 
 /**
- * Represents a short answer question.
+ * Represents a Free text question.
  *
  * @copyright  2009 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class qtype_shortanswer_question extends question_graded_by_strategy
+class qtype_freetext_question extends question_graded_by_strategy
         implements question_response_answer_comparer {
     /** @var boolean whether answers should be graded case-sensitively. */
     public $usecase;
@@ -66,7 +66,7 @@ class qtype_shortanswer_question extends question_graded_by_strategy
         if ($this->is_gradable_response($response)) {
             return '';
         }
-        return get_string('pleaseenterananswer', 'qtype_shortanswer');
+        return get_string('pleaseenterananswer', 'qtype_freetext');
     }
 
     public function is_same_response(array $prevresponse, array $newresponse) {

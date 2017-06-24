@@ -27,12 +27,12 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * restore plugin class that provides the necessary information
- * needed to restore one shortanswer qtype plugin
+ * needed to restore one freetext qtype plugin
  *
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_qtype_shortanswer_plugin extends restore_qtype_plugin {
+class restore_qtype_freetext_plugin extends restore_qtype_plugin {
 
     /**
      * Returns the paths to be handled by the plugin at question level
@@ -45,18 +45,18 @@ class restore_qtype_shortanswer_plugin extends restore_qtype_plugin {
         $this->add_question_question_answers($paths);
 
         // Add own qtype stuff.
-        $elename = 'shortanswer';
+        $elename = 'freetext';
         // We used get_recommended_name() so this works.
-        $elepath = $this->get_pathfor('/shortanswer');
+        $elepath = $this->get_pathfor('/freetext');
         $paths[] = new restore_path_element($elename, $elepath);
 
         return $paths; // And we return the interesting paths.
     }
 
     /**
-     * Process the qtype/shortanswer element
+     * Process the qtype/freetext element
      */
-    public function process_shortanswer($data) {
+    public function process_freetext($data) {
         global $DB;
 
         $data = (object)$data;
@@ -68,15 +68,15 @@ class restore_qtype_shortanswer_plugin extends restore_qtype_plugin {
         $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
 
         // If the question has been created by restore, we need to create its
-        // qtype_shortanswer_options too, if they are defined (the gui should ensure this).
+        // qtype_freetext_options too, if they are defined (the gui should ensure this).
         if ($questioncreated) {
             $data->questionid = $newquestionid;
 
             // It is possible for old backup files to contain unique key violations.
             // We need to check to avoid that.
-            if (!$DB->record_exists('qtype_shortanswer_options', array('questionid' => $data->questionid))) {
-                $newitemid = $DB->insert_record('qtype_shortanswer_options', $data);
-                $this->set_mapping('qtype_shortanswer_options', $oldid, $newitemid);
+            if (!$DB->record_exists('qtype_freetext_options', array('questionid' => $data->questionid))) {
+                $newitemid = $DB->insert_record('qtype_freetext_options', $data);
+                $this->set_mapping('qtype_freetext_options', $oldid, $newitemid);
             }
         }
     }

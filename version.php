@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Short answer question type version information.
+ * Free text question type version information.
  *
  * @package    qtype
- * @subpackage shortanswer
+ * @subpackage freetext
  * @copyright  1999 onwards Martin Dougiamas {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'qtype_shortanswer';
+$plugin->component = 'qtype_freetext';
 $plugin->version   = 2016120500;
 
 $plugin->requires  = 2016112900;

@@ -26,12 +26,12 @@ defined('MOODLE_INTERNAL') || die();
 
 
 /**
- * Provides the information to backup shortanswer questions
+ * Provides the information to backup freetext questions
  *
  * @copyright  2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_qtype_shortanswer_plugin extends backup_qtype_plugin {
+class backup_qtype_freetext_plugin extends backup_qtype_plugin {
 
     /**
      * Returns the qtype information to attach to question element
@@ -39,7 +39,7 @@ class backup_qtype_shortanswer_plugin extends backup_qtype_plugin {
     protected function define_question_plugin_structure() {
 
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element(null, '../../qtype', 'shortanswer');
+        $plugin = $this->get_plugin_element(null, '../../qtype', 'freetext');
 
         // Create one standard named plugin element (the visible container).
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -52,13 +52,13 @@ class backup_qtype_shortanswer_plugin extends backup_qtype_plugin {
         $this->add_question_question_answers($pluginwrapper);
 
         // Now create the qtype own structures.
-        $shortanswer = new backup_nested_element('shortanswer', array('id'), array('usecase'));
+        $freetext = new backup_nested_element('freetext', array('id'), array('usecase'));
 
         // Now the own qtype tree.
-        $pluginwrapper->add_child($shortanswer);
+        $pluginwrapper->add_child($freetext);
 
         // Set source to populate the data.
-        $shortanswer->set_source_table('qtype_shortanswer_options',
+        $freetext->set_source_table('qtype_freetext_options',
                 array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.
