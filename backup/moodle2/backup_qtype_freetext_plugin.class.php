@@ -48,13 +48,13 @@ class backup_qtype_freetext_plugin extends backup_qtype_plugin {
         $plugin->add_child($pluginwrapper);
 
         // Now create the qtype own structures.
-        $freetext = new backup_nested_element('freetext', array('id'), array('usecase'));
+        $freetext = new backup_nested_element('freetext', array('id'), array('usecase', 'wsqid'));
 
         // Now the own qtype tree.
         $pluginwrapper->add_child($freetext);
 
         // Set source to populate the data.
-        $freetext->set_source_table('qtype_freetext_options',
+        $freetext->set_source_table('question_freetext',
                 array('questionid' => backup::VAR_PARENTID));
 
         // Don't need to annotate ids nor files.

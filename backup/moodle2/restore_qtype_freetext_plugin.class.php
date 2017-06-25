@@ -65,15 +65,15 @@ class restore_qtype_freetext_plugin extends restore_qtype_plugin {
         $questioncreated = $this->get_mappingid('question_created', $oldquestionid) ? true : false;
 
         // If the question has been created by restore, we need to create its
-        // qtype_freetext_options too, if they are defined (the gui should ensure this).
+        // question_freetext too, if they are defined (the gui should ensure this).
         if ($questioncreated) {
             $data->questionid = $newquestionid;
 
             // It is possible for old backup files to contain unique key violations.
             // We need to check to avoid that.
-            if (!$DB->record_exists('qtype_freetext_options', array('questionid' => $data->questionid))) {
-                $newitemid = $DB->insert_record('qtype_freetext_options', $data);
-                $this->set_mapping('qtype_freetext_options', $oldid, $newitemid);
+            if (!$DB->record_exists('question_freetext', array('questionid' => $data->questionid))) {
+                $newitemid = $DB->insert_record('question_freetext', $data);
+                $this->set_mapping('question_freetext', $oldid, $newitemid);
             }
         }
     }

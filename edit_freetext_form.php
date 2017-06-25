@@ -39,6 +39,13 @@ class qtype_freetext_edit_form extends question_edit_form {
      * @param MoodleQuickForm $mform
      */
     protected function definition_inner($mform) {
+
+        $mform->addElement('text', 'wsqid', get_string('wsqid', 'qtype_freetext'),
+            array('size' => 10, 'maxlength' => 10));
+        $mform->setType('wsqid', PARAM_INT);
+        $mform->addRule('wsqid', null, 'required', null, 'client');
+        $mform->addRule('wsqid', null, 'numeric', null, 'client');
+
         $menu = array(
             get_string('caseno', 'qtype_freetext'),
             get_string('caseyes', 'qtype_freetext')

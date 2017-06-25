@@ -38,6 +38,9 @@ class qtype_freetext_question extends question_graded_automatically {
     /** @var boolean whether answers should be graded case-sensitively. */
     public $usecase;
 
+    /** @var integer the question id for the web service */
+    public $wsqid;
+
     public function get_expected_data() {
         return array('answer' => PARAM_RAW_TRIMMED);
     }
