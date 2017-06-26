@@ -35,3 +35,4 @@ $string['pluginnameadding'] = 'Adding a Free text question';
 $string['pluginnameediting'] = 'Editing a Free text question';
 $string['pluginnamesummary'] = 'Allows a response of one or a few words that is graded by a web service.';
 $string['wsqid'] = 'Web Service Question ID';
+$string['wsurl'] = 'Free text WS URL';
