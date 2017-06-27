@@ -56,7 +56,7 @@ class qtype_freetext_renderer extends qtype_renderer {
 
         $feedbackimg = '';
         if ($options->correctness) {
-            $fraction = 0;
+            $fraction = \qtype_freetext\client::mark($question->wsqid, $currentanswer);
             $inputattributes['class'] .= ' ' . $this->feedback_class($fraction);
             $feedbackimg = $this->feedback_image($fraction);
         }
@@ -97,15 +97,15 @@ class qtype_freetext_renderer extends qtype_renderer {
     }
 
     public function specific_feedback(question_attempt $qa) {
-/*        $question = $qa->get_question();
+        $question = $qa->get_question();
 
-        $answer = $question->get_matching_answer(array('answer' => $qa->get_last_qt_var('answer')));
-        if (!$answer || !$answer->feedback) {
-            return '';
-        }
+        $response = $qa->get_last_qt_var('answer');
+        $justification = \qtype_freetext\client::justification($question->wsqid, $response);
 
-        return $question->format_text($answer->feedback, $answer->feedbackformat,
-                $qa, 'question', 'answerfeedback', $answer->id);*/
-        return '';
+        $justificationstring = '"'. join('", "', $justification) . '"';
+
+        $feedback = get_string('justification', 'qtype_freetext', $justificationstring);
+
+        return $feedback;
     }
 }
