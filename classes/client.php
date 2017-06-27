@@ -1,6 +1,6 @@
 <?php
 
-namespace qtype_freetext\ws;
+namespace qtype_freetext;
 
 use core\session\exception;
 
