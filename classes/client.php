@@ -7,15 +7,54 @@ use core\session\exception;
 class client {
 
     /**
+     * Using this variable to cache the response for the server so that we can get the fraction in the question
+     * grade_response method and the feedback in the renderer without repeating ws calls.
+     *
+     * @var array first index is ws question id, second index is student response.
+     *
+     */
+    protected static $returned = array();
+
+
+    /**
+     * Get just the justification (mark) from the web service result.
+     *
+     * @param $questionid int web service question id
+     * @param $response string student response
+     * @return array zero based array of strings
+     */
+    public static function justification($questionid, $response) {
+        return self::cache_returned_data($questionid, $response)->justification;
+    }
+
+    /**
+     * Get just the fraction (mark) from the web service result.
+     *
+     * @param $questionid int web service question id
+     * @param $response string student response
+     * @return integer
+     */
+    public static function mark($questionid, $response) {
+        return self::cache_returned_data($questionid, $response)->mark;
+    }
+
+    /**
      * Have free text web service grade student response.
      *
      * @param $questionid integer the ws question id specified in the question editing form.
      * @param $response
      * @return mixed
      */
-    public static function grade($questionid, $response) {
-        $returned = self::json_decode(self::send_ws_grading_request($questionid, $response));
-        return $returned;
+    protected static function cache_returned_data($questionid, $response) {
+        if (isset($returned[$questionid])) {
+            if (isset($returned[$questionid][$response])) {
+                return $returned[$questionid][$response];
+            }
+        } else {
+            $returned[$questionid] = array();
+        }
+        $returned[$questionid][$response] = self::json_decode(self::send_ws_request($questionid, $response));
+        return $returned[$questionid][$response];
     }
 
     /**
@@ -57,7 +96,15 @@ class client {
         return $decodedcontent;
     }
 
-    protected static function send_ws_grading_request($questionid, $response) {
+    /**
+     * The method that actually does the ws call.
+     *
+     * @param $questionid
+     * @param $response
+     * @return mixed
+     * @throws exception
+     */
+    protected static function send_ws_request($questionid, $response) {
         global $CFG;
 
         $url = get_config('qtype_freetext', 'wsurl');

@@ -71,8 +71,8 @@ class qtype_freetext_question extends question_graded_automatically {
     }
 
     public function grade_response(array $response) {
-        $wsreturns = \qtype_freetext\client::grade($this->wsqid, $response['answer']);
-        return array($wsreturns['mark'], question_state::graded_state_for_fraction($wsreturns['mark']));
+        $fraction = \qtype_freetext\client::mark($this->wsqid, $response['answer']);
+        return array($fraction, question_state::graded_state_for_fraction($fraction));
     }
 
     /**
