@@ -35,8 +35,6 @@ require_once($CFG->dirroot . '/question/type/questionbase.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class qtype_freetext_question extends question_graded_automatically {
-    /** @var boolean whether answers should be graded case-sensitively. */
-    public $usecase;
 
     /** @var integer the question id for the web service */
     public $wsqid;

@@ -48,7 +48,7 @@ class backup_qtype_freetext_plugin extends backup_qtype_plugin {
         $plugin->add_child($pluginwrapper);
 
         // Now create the qtype own structures.
-        $freetext = new backup_nested_element('freetext', array('id'), array('usecase', 'wsqid'));
+        $freetext = new backup_nested_element('freetext', array('id'), array('wsqid'));
 
         // Now the own qtype tree.
         $pluginwrapper->add_child($freetext);

@@ -24,9 +24,6 @@
  */
 
 $string['answer'] = 'Answer: {$a}';
-$string['caseno'] = 'No, case is unimportant';
-$string['casesensitive'] = 'Case sensitivity';
-$string['caseyes'] = 'Yes, case must match';
 $string['pleaseenterananswer'] = 'Please enter an answer.';
 $string['pluginname'] = 'Free text';
 $string['pluginname_help'] = 'In response to a question (that may include a image) the respondent types a word or short phrase. Responses are graded by a web service. If the "Case sensitive" option is selected, then you can have different scores for "Word" or "word".';

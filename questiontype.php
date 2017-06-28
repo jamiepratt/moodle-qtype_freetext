@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/question/type/freetext/question.php');
  */
 class qtype_freetext extends question_type {
     public function extra_question_fields() {
-        return array('question_freetext', 'usecase', 'wsqid');
+        return array('question_freetext', 'wsqid');
     }
 
     public function move_files($questionid, $oldcontextid, $newcontextid) {

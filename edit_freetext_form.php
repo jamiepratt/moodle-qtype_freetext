@@ -46,13 +46,6 @@ class qtype_freetext_edit_form extends question_edit_form {
         $mform->addRule('wsqid', null, 'required', null, 'client');
         $mform->addRule('wsqid', null, 'numeric', null, 'client');
 
-        $menu = array(
-            get_string('caseno', 'qtype_freetext'),
-            get_string('caseyes', 'qtype_freetext')
-        );
-        $mform->addElement('select', 'usecase',
-                get_string('casesensitive', 'qtype_freetext'), $menu);
-
         $this->add_interactive_settings();
 
         // Remove the default mark field from form and replace with constant.
