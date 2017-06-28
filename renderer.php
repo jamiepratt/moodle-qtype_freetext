@@ -68,6 +68,7 @@ class qtype_freetext_renderer extends qtype_renderer {
             $inputattributes['size'] = round(strlen($placeholder) * 1.1);
         }
         $input = html_writer::empty_tag('input', $inputattributes) . $feedbackimg;
+        $textarea = $this->textarea($inputname, $currentanswer, $options->readonly) . $feedbackimg;
 
         if ($placeholder) {
             $inputinplace = html_writer::tag('label', get_string('answer'),
@@ -81,9 +82,7 @@ class qtype_freetext_renderer extends qtype_renderer {
 
         if (!$placeholder) {
             $result .= html_writer::start_tag('div', array('class' => 'ablock form-inline'));
-            $result .= html_writer::tag('label', get_string('answer', 'qtype_freetext',
-                    html_writer::tag('span', $input, array('class' => 'answer'))),
-                    array('for' => $inputattributes['id']));
+            $result .= $textarea;
             $result .= html_writer::end_tag('div');
         }
 
@@ -94,6 +93,35 @@ class qtype_freetext_renderer extends qtype_renderer {
         }
 
         return $result;
+    }
+
+    /**
+     * Return html for a text area.
+     *
+     * @param string $name of textarea
+     * @param string $contents of text area
+     * @param bool $readonly is it readonly?
+     * @return string html for text area
+     */
+    protected function textarea($name, $contents, $readonly) {
+
+        $attributes = array(
+            'type' => 'textarea',
+            'name' => $name,
+            'value' => $contents,
+            'id' => $name,
+            'rows' => 6,
+            'cols' => 80,
+            'class' => 'form-control answer',
+        );
+
+        if ($readonly) {
+            $attributes['readonly'] = 'readonly';
+        }
+        // Use a hidden label for accessibility for those using screen readers.
+        $label = html_writer::tag('label', get_string('answer'),
+            array('for' => $attributes['id'], 'class' => 'accesshide'));
+        return $label.html_writer::tag('textarea', s($contents), $attributes);
     }
 
     public function specific_feedback(question_attempt $qa) {
