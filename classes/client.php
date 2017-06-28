@@ -24,6 +24,7 @@ class client {
      * @return array zero based array of strings
      */
     public static function justification($questionid, $response) {
+        $response = self::process_response_before_sending($response);
         return self::cache_returned_data($questionid, $response)->justification;
     }
 
@@ -35,6 +36,7 @@ class client {
      * @return integer
      */
     public static function mark($questionid, $response) {
+        $response = self::process_response_before_sending($response);
         return self::cache_returned_data($questionid, $response)->mark;
     }
 
@@ -143,5 +145,43 @@ class client {
 
         return $content;
 
+    }
+
+    /**
+     * This is the place where we do any processing necessary of the response given by the student
+     * before sending it off to the web service for grading.
+     *
+     * @param string $response from student
+     * @return string to send to web service
+     */
+    protected static function process_response_before_sending($response) {
+        $response = self::safe_normalize($response);
+        $response = \core_text::strtolower($response);
+        return $response;
+    }
+
+    /**
+     * Normalise a UTf-8 string to FORM_C, avoiding the pitfalls in PHP's
+     * normalizer_normalize function.
+     * @param string $string the input string.
+     * @return string the normalised string.
+     */
+    protected static function safe_normalize($string) {
+        if ($string === '') {
+            return '';
+        }
+
+        if (!function_exists('normalizer_normalize')) {
+            return $string;
+        }
+
+        $normalised = normalizer_normalize($string, Normalizer::FORM_C);
+        if (is_null($normalised)) {
+            // An error occurred in normalizer_normalize, but we have no idea what.
+            debugging('Failed to normalise string: ' . $string, DEBUG_DEVELOPER);
+            return $string; // Return the original string, since it is the best we have.
+        }
+
+        return $normalised;
     }
 }
