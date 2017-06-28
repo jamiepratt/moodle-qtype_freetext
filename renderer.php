@@ -130,10 +130,15 @@ class qtype_freetext_renderer extends qtype_renderer {
         $response = $qa->get_last_qt_var('answer');
         $justification = \qtype_freetext\client::justification($question->wsqid, $response);
 
-        $justificationstring = '"'. join('", "', $justification) . '"';
+        if (count($justification) > 0) {
+            $justificationstring = '"'. join('", "', $justification) . '"';
 
-        $feedback = get_string('justification', 'qtype_freetext', $justificationstring);
+            $feedback = get_string('justification', 'qtype_freetext', $justificationstring);
 
-        return $feedback;
+            return $feedback;
+
+        } else {
+            return '';
+        }
     }
 }
