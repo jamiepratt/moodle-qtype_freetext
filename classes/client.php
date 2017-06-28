@@ -111,7 +111,10 @@ class client {
 
         $url = get_config('qtype_freetext', 'wsurl');
 
-        $postparams = array('q_id' => $questionid, 'answer' => $response);
+        $postparams = array('q_no' => $questionid,
+                            'q_part' => 0,
+                            'q_sub' => 0,
+                            'answer' => $response);
         $postdata = json_encode($postparams);
 
         $curloptions = array(
