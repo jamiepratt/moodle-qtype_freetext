@@ -37,6 +37,7 @@ class qtype_freetext_renderer extends qtype_renderer {
     public function formulation_and_controls(question_attempt $qa,
             question_display_options $options) {
 
+        global $DB;
         $question = $qa->get_question();
         $currentanswer = $qa->get_last_qt_var('answer');
 
@@ -90,6 +91,19 @@ class qtype_freetext_renderer extends qtype_renderer {
             $result .= html_writer::nonempty_tag('div',
                     $question->get_validation_error(array('answer' => $currentanswer)),
                     array('class' => 'validationerror'));
+        }
+
+        if ($options->marks == $options::MARK_AND_MAX) {
+            $qaid = $qa->get_database_id();
+            if (!$DB->record_exists('question_freetext_reqregrade', array('qattemptid' => $qaid))) {
+                $url = new moodle_url('/question/type/freetext/reqregrade.php',
+                    array('returnurl' => $this->page->url->out(),
+                        'sesskey' => sesskey(), 'id' => $qaid));
+                $result .= html_writer::link($url, get_string('flagforregrade', 'qtype_freetext'));
+
+            } else {
+                $result .= get_string('flaggedforregrade', 'qtype_freetext');
+            }
         }
 
         return $result;

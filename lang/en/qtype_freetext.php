@@ -34,3 +34,5 @@ $string['pluginnamesummary'] = 'Allows a response of one or a few words that is 
 $string['wsqid'] = 'Web Service Question ID';
 $string['wsurl'] = 'Free text WS URL';
 $string['justification'] = 'We awarded this mark because your answer matched the patterns {$a}.';
+$string['flagforregrade'] = 'Request regrading of this question attempt by a human.';
+$string['flaggedforregrade'] = 'Regrading requested.';
