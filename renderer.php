@@ -37,7 +37,7 @@ class qtype_freetext_renderer extends qtype_renderer {
     public function formulation_and_controls(question_attempt $qa,
             question_display_options $options) {
 
-        global $DB;
+        global $DB, $USER;
         $question = $qa->get_question();
         $currentanswer = $qa->get_last_qt_var('answer');
 
@@ -96,11 +96,17 @@ class qtype_freetext_renderer extends qtype_renderer {
         if ($options->marks == $options::MARK_AND_MAX) {
             $qaid = $qa->get_database_id();
             if (!$DB->record_exists('question_freetext_reqregrade', array('qattemptid' => $qaid))) {
-                $url = new moodle_url('/question/type/freetext/reqregrade.php',
-                    array('returnurl' => $this->page->url->out(),
-                        'sesskey' => sesskey(), 'id' => $qaid));
-                $result .= html_writer::link($url, get_string('flagforregrade', 'qtype_freetext'));
-
+                //Since we don't know which activity is using this question and the activity keeps track of who
+                //is attempting this activity, we'll look at who answered the question in order to decide who can
+                //ask for a teacher regrade.
+                $answerstep = $qa->get_last_step_with_qt_var('answer');
+                // If no step is found an empty step is returned.
+                if (($answerstep->has_qt_var('answer')) && $answerstep->get_user_id() == $USER->id) {
+                    $url = new moodle_url('/question/type/freetext/reqregrade.php',
+                        array('returnurl' => $this->page->url->out(),
+                            'sesskey' => sesskey(), 'id' => $qaid));
+                    $result .= html_writer::link($url, get_string('flagforregrade', 'qtype_freetext'));
+                }
             } else {
                 $result .= get_string('flaggedforregrade', 'qtype_freetext');
             }

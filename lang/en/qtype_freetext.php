@@ -36,3 +36,6 @@ $string['wsurl'] = 'Free text WS URL';
 $string['justification'] = 'We awarded this mark because your answer matched the patterns {$a}.';
 $string['flagforregrade'] = 'Request regrading of this question attempt by a human.';
 $string['flaggedforregrade'] = 'Regrading requested.';
+$string['answernotfound'] = 'There has not yet been an answer to regrade';
+$string['notyouranswer'] = 'This is not your answer!';
+$string['invalidqaid'] = 'Invalid question attempt id';
