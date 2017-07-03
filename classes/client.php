@@ -48,15 +48,15 @@ class client {
      * @return mixed
      */
     protected static function cache_returned_data($questionid, $response) {
-        if (isset($returned[$questionid])) {
-            if (isset($returned[$questionid][$response])) {
-                return $returned[$questionid][$response];
+        if (isset(self::$returned[$questionid])) {
+            if (isset(self::$returned[$questionid][$response])) {
+                return self::$returned[$questionid][$response];
             }
         } else {
-            $returned[$questionid] = array();
+            self::$returned[$questionid] = array();
         }
-        $returned[$questionid][$response] = self::json_decode(self::send_ws_request($questionid, $response));
-        return $returned[$questionid][$response];
+        self::$returned[$questionid][$response] = self::json_decode(self::send_ws_request($questionid, $response));
+        return self::$returned[$questionid][$response];
     }
 
     /**
