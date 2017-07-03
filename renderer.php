@@ -93,7 +93,7 @@ class qtype_freetext_renderer extends qtype_renderer {
                     array('class' => 'validationerror'));
         }
 
-        if ($options->marks == $options::MARK_AND_MAX) {
+        if ($options->marks == $options::MARK_AND_MAX || $options->correctness) {
             $qaid = $qa->get_database_id();
             if (!$DB->record_exists('question_freetext_reqregrade', array('qattemptid' => $qaid))) {
                 //Since we don't know which activity is using this question and the activity keeps track of who
