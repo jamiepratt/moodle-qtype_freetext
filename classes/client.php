@@ -139,7 +139,7 @@ class client {
         if (curl_errno($ch)) {
             $error = curl_error($ch);
             curl_close($ch);
-            throw new moodle_exception('errorcurl', 'qtype_freetext', '', $error);
+            throw new \moodle_exception('errorcurl', 'qtype_freetext', '', $error);
         }
         curl_close($ch);
 
