@@ -175,7 +175,7 @@ class client {
             return $string;
         }
 
-        $normalised = normalizer_normalize($string, Normalizer::FORM_C);
+        $normalised = normalizer_normalize($string, \Normalizer::FORM_C);
         if (is_null($normalised)) {
             // An error occurred in normalizer_normalize, but we have no idea what.
             debugging('Failed to normalise string: ' . $string, DEBUG_DEVELOPER);
