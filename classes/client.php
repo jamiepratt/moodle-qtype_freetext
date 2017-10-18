@@ -93,7 +93,7 @@ class client {
                 break;
         }
         if (!empty($error)) {
-            throw new exception('errorjson', $error);
+            throw new \moodle_exception('errorjson', 'qtype_freetext', '', $error);
         }
         return $decodedcontent;
     }
@@ -139,7 +139,7 @@ class client {
         if (curl_errno($ch)) {
             $error = curl_error($ch);
             curl_close($ch);
-            throw new exception('errorcurl', $error);
+            throw new moodle_exception('errorcurl', 'qtype_freetext', '', $error);
         }
         curl_close($ch);
 

@@ -39,3 +39,5 @@ $string['flaggedforregrade'] = 'Regrading requested.';
 $string['answernotfound'] = 'There has not yet been an answer to regrade';
 $string['notyouranswer'] = 'This is not your answer!';
 $string['invalidqaid'] = 'Invalid question attempt id';
+$string['errorjson'] = 'JSON error : {$a}';
+$string['errorcurl'] = 'CURL error : {$a}';
